@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+
 
 import 'dart:convert';
+import 'package:cookbook/util/cuisine_tile.dart';
+import 'package:cookbook/util/cuisines.dart';
 import 'package:cookbook/util/search_tile.dart';
 import 'package:cookbook/util/secrets.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //List<List<String>> a = [];
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 70,
@@ -50,13 +53,13 @@ class _HomePageState extends State<HomePage> {
           ),
           //curved edges
           elevation: 3,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(12),
           )),
           //colour initialization
-          backgroundColor: Color.fromRGBO(177, 255, 199, 1),
-          shadowColor: Color.fromRGBO(102, 180, 124, 1),
+          backgroundColor: const Color.fromRGBO(177, 255, 199, 1),
+          shadowColor: const Color.fromRGBO(102, 180, 124, 1),
         ),
         body: FutureBuilder(
             future: recipes,
@@ -69,18 +72,26 @@ class _HomePageState extends State<HomePage> {
               }
               final data = snapshot.data!;
               return Padding(
-                  padding: EdgeInsets.all(0),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('TODAYS TOP PICKS',style: TextStyle(fontSize: 24,fontFamily: 'Ariel'),),
-                        ),
+                  padding: const EdgeInsets.all(0),
+                  child: ListView(
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 40),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'TODAYS TOP PICKS',
+                            style: TextStyle(
+                                fontSize: 28,
+                                fontFamily: 'Ariel',
+                                color: Color.fromRGBO(0, 70, 20, 1)),
+                          ),
+                        ),const SizedBox(height: 5,)
+                        ,
                         SizedBox(
-                            height: MediaQuery.of(context).size.height/2.55,
+                            height: (MediaQuery.of(context).size.width - 24),
                             child: ListView.builder(
-                                itemCount: 5,
+                                itemCount: 10,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   final result = data['results'];
@@ -92,34 +103,41 @@ class _HomePageState extends State<HomePage> {
                                     image: image,
                                     title: name,
                                   );
-                                }))
+                                })),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'CUISINE',
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontFamily: 'Ariel',
+                                color: Color.fromRGBO(0, 70, 20, 1)),
+                          ),
+                        ),
+                        const SizedBox(height: 15,)
+                        ,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: SizedBox(
+                              height: (MediaQuery.of(context).size.width/2.9),
+                              child: CustomScrollView(
+                                scrollDirection: Axis.horizontal,
+                                slivers: [
+                                  SliverGrid(
+                                      delegate: SliverChildBuilderDelegate(
+                                          (context, index) {
+                                        return CuisineTile(cuisineName: cuisineItems[index]);
+                                      },childCount: cuisineItems.length),
+                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 16,crossAxisSpacing: 16,childAspectRatio: 0.41))
+                                ],
+                              )),
+                        ),
                       ]));
             }));
   }
 }
-/*
-FutureBuilder(
-            future: recipes,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(child: Text(snapshot.error.toString()));
-              }
-              final data = snapshot.data!;
-              return ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    final result = data['results'];
-                    final resultId = result[index]['id'];
-                    final name = data['results'][index]['title'];
-                    final image = data['results'][index]['image'];
-                    return SearchTile(
-                      id: resultId,
-                      image: image,
-                      title: name,
-                    );
-                  });
-            })
-*/
+//Text color 0 50 14
+//'African','Asian','American','British','Cajun','Caribbean','Chinese','Eastern European','European','French','German','Greek','Indian','Irish','Italian','Japanese','Jewish','Korean','Latin American','Mediterranean','Mexican','Middle Eastern','Nordic','Southern','Spanish','Thai','Vietnamese'
