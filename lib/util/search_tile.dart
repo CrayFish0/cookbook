@@ -33,18 +33,18 @@ class SearchTile extends StatelessWidget {
                       offset: Offset(0.0, 0.0))
                 ],
                 color: Color.fromRGBO(177, 255, 199, 1),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Card(
-                      elevation: 1,
-                      child: Image.network(
-                        image,
-                        fit: BoxFit.fill,
+                    ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      child: Card(
+                        elevation: 1,
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -53,7 +53,7 @@ class SearchTile extends StatelessWidget {
                       children: [
                         Expanded(
                             child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 24,top: 14),
+                          padding: const EdgeInsets.only(left: 20, right: 24,top: 13),
                           child: Text(
                             title,
                             maxLines: 1,
@@ -64,7 +64,7 @@ class SearchTile extends StatelessWidget {
                           ),
                         )),
                         Padding(
-                            padding: const EdgeInsets.only(right: 12, top: 20),
+                            padding: const EdgeInsets.only(right: 12, top: 18),
                             child: FavoriteButton(
                               iconSize: 30,
                               iconColor: const Color.fromARGB(255, 255, 70, 46),
