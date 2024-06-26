@@ -10,12 +10,11 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 90),
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.only(bottom: 8),
       child: GNav(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           activeColor: const Color.fromRGBO(102, 180, 124, 1),
           color: Colors.grey,
-          iconSize: 28,
           tabBackgroundColor: const Color.fromARGB(255, 227, 227, 227),
           tabActiveBorder:
               Border.all(color: const Color.fromARGB(255, 201, 201, 201)),

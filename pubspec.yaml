@@ -38,6 +38,7 @@ dependencies:
   http: ^1.2.1
   favorite_button: ^0.0.4
   google_nav_bar: ^5.0.6
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

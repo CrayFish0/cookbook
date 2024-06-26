@@ -29,4 +29,6 @@ const List<String> cuisineItems = [
   'Vietnamese'
 ];
 
-Map<String,dynamic>? data;
+Map<String, dynamic>? data;
+
+List<List>? favourites;
