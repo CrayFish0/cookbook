@@ -36,16 +36,14 @@ class SearchTile extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      child: Card(
-                        elevation: 1,
-                        child: Image.network(
+                    ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      child:  Image.network(
                           image,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.fitWidth,
                         ),
-                      ),
+                      
                     ),
                     const SizedBox(height: 2),
                     Row(

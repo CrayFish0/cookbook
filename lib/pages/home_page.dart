@@ -1,8 +1,6 @@
-
-
 import 'dart:convert';
 import 'package:cookbook/util/cuisine_tile.dart';
-import 'package:cookbook/util/cuisines.dart';
+import 'package:cookbook/util/global.dart';
 import 'package:cookbook/util/search_tile.dart';
 import 'package:cookbook/util/secrets.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     try {
       final res = await http.get(
         Uri.parse(
-            'https://api.spoonacular.com/recipes/complexSearch?apiKey=$spoonacularApi'),
+            'https://api.spoonacular.com/recipes/random?apiKey=$spoonacularApi&includeNutrition=false&number=10'),
       );
       final data = jsonDecode(res.body);
       if (data['totalResults'] == 0) {
@@ -43,35 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //List<List<String>> a = [];
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 70,
-          //Logo initialisation
-          title: Image.asset(
-            "assets/Logo.png",
-            width: 120,
-            height: 120,
-          ),
-          //curved edges
-          elevation: 3,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(12),
-          )),
-          //colour initialization
-          backgroundColor: const Color.fromRGBO(177, 255, 199, 1),
-          shadowColor: const Color.fromRGBO(102, 180, 124, 1),
-        ),
-        body: FutureBuilder(
-            future: recipes,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(child: Text(snapshot.error.toString()));
-              }
-              final data = snapshot.data!;
-              return Padding(
+        body: Padding(
                   padding: const EdgeInsets.all(0),
                   child: ListView(
                       //crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,15 +59,15 @@ class _HomePageState extends State<HomePage> {
                         ),const SizedBox(height: 5,)
                         ,
                         SizedBox(
-                            height: (MediaQuery.of(context).size.width - 24),
+                            height: (MediaQuery.of(context).size.width - 50),
                             child: ListView.builder(
                                 itemCount: 10,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
-                                  final result = data['results'];
+                                  final result = data?['recipes'];
                                   final resultId = result[index]['id'];
-                                  final name = data['results'][index]['title'];
-                                  final image = data['results'][index]['image'];
+                                  final name = result[index]['title'];
+                                  final image = result[index]['image'] ?? 'No Image';
                                   return SearchTile(
                                     id: resultId,
                                     image: image,
@@ -135,8 +105,8 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               )),
                         ),
-                      ]));
-            }));
+                      ]))
+            );
   }
 }
 //Text color 0 50 14
