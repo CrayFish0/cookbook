@@ -55,24 +55,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 70,
-        //Logo initialisation
-        title: Image.asset(
-          "assets/Logo.png",
-          width: 120,
-          height: 120,
-        ),
-        //curved edges
-        elevation: 3,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(12),
-        )),
-        //colour initialization
-        backgroundColor: const Color.fromRGBO(177, 255, 199, 1),
-        shadowColor: const Color.fromRGBO(102, 180, 124, 1),
-      ),
       bottomNavigationBar: BottomNavBar(
         onTabChange: (index) => navigateBar(index),
       ),
