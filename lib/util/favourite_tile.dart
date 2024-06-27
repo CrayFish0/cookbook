@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cookbook/pages/information_page.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteTile extends StatelessWidget {
@@ -12,7 +13,8 @@ class FavouriteTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        log('message');
+        Navigator.push(context,
+              MaterialPageRoute(builder: (context) => InformationPage(id: id,image: image,name: name,)));
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -56,7 +58,7 @@ class FavouriteTile extends StatelessWidget {
                     onPressed: () {
                       log('message');
                     },
-                    icon: Icon(Icons.delete)),
+                    icon: const Icon(Icons.delete)),
               ),
             )
           ],

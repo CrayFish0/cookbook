@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cookbook/pages/information_page.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,16 @@ class SmallTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {log('message')},
+      onTap: () => {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => InformationPage(
+                      id: id,
+                      image: image,
+                      name: name,
+                    )))
+      },
       child: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -24,7 +34,8 @@ class SmallTile extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: Container(color: Colors.white,
+                child: Container(
+                  color: Colors.white,
                   child: Image.network(
                     image,
                     opacity: const AlwaysStoppedAnimation(.8),

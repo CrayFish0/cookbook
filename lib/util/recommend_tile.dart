@@ -1,7 +1,5 @@
 import 'dart:developer';
-import 'dart:ffi';
-import 'package:collection/collection.dart';
-import 'package:cookbook/util/global.dart';
+import 'package:cookbook/pages/information_page.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +18,8 @@ class RecommendTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          log('$id $image $title');
-          log((MediaQuery.of(context).size.width).toString());
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => InformationPage(id: id,image: image,name: title,)));
         },
         child: Padding(
             padding: const EdgeInsets.all(24),

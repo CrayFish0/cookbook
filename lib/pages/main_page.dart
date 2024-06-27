@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
       }
       return data;
     } catch (e) {
-      throw e.toString();
+      throw 'Connection Error';
     }
   }
 

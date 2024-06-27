@@ -1,11 +1,7 @@
-import 'dart:convert';
 import 'package:cookbook/util/cuisine_tile.dart';
 import 'package:cookbook/util/global.dart';
 import 'package:cookbook/util/recommend_tile.dart';
-import 'package:cookbook/util/secrets.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,28 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<Map<String, dynamic>> recipes;
-  @override
-  void initState() {
-    recipes = getRecipes();
-    super.initState();
-  }
-
-  Future<Map<String, dynamic>> getRecipes() async {
-    try {
-      final res = await http.get(
-        Uri.parse(
-            'https://api.spoonacular.com/recipes/random?apiKey=$spoonacularApi&includeNutrition=false&number=10'),
-      );
-      final data = jsonDecode(res.body);
-      if (data['totalResults'] == 0) {
-        throw 'No result Found';
-      }
-      return data;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
