@@ -1,5 +1,7 @@
-import 'package:cookbook/util/favourite_tile.dart';
+import 'dart:developer';
+
 import 'package:cookbook/util/secrets.dart';
+import 'package:cookbook/util/small_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -21,7 +23,8 @@ class _SearchPageState extends State<SearchPage> {
 
   Future<Map<String, dynamic>> getRecipes(String? search) async {
     try {
-      String link = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=$spoonacularApi&query=$search';
+      String link =
+          'https://api.spoonacular.com/recipes/complexSearch?apiKey=$spoonacularApi&query=$search';
       final res = await http.get(
         Uri.parse(link),
       );
@@ -38,7 +41,9 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
           height: 20,
@@ -48,10 +53,12 @@ class _SearchPageState extends State<SearchPage> {
               const EdgeInsets.only(top: 40, left: 24, right: 24, bottom: 20),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            child: TextField(onSubmitted: (value) => {setState(() {
-              recipes=getRecipes(value);
-            })
-            },
+            child: TextField(
+              onSubmitted: (value) => {
+                setState(() {
+                  recipes = getRecipes(value);
+                })
+              },
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Search...',
@@ -69,21 +76,26 @@ class _SearchPageState extends State<SearchPage> {
                 return Center(child: Text(snapshot.error.toString()));
               }
               final resultdata = snapshot.data!;
+              final result = resultdata['results'];
               return Container(
                   padding: const EdgeInsets.all(16),
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height * 0.70,
                   child: CustomScrollView(
                     scrollDirection: Axis.vertical,
                     slivers: [
                       SliverGrid(
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                            final result = resultdata['results'];
+                          delegate: SliverChildBuilderDelegate(
+                              (context, index) {
                             final resultId = result[index]['id'];
                             final name = result[index]['title'];
                             final image = result[index]['image'] ?? 'No Image';
-                            return Center(child: Text(name));
-                          }, childCount: 10),
+
+                            return SmallTile(
+                                id: resultId, image: image, name: name);
+                          },
+                              childCount: resultdata['totalResults'] < 10
+                                  ? resultdata['totalResults']
+                                  : 10),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
@@ -97,21 +109,3 @@ class _SearchPageState extends State<SearchPage> {
     ));
   }
 }
-/* Container(
-            padding: const EdgeInsets.all(16),
-            height: MediaQuery.of(context).size.height,
-            child: CustomScrollView(
-              scrollDirection: Axis.vertical,
-              slivers: [
-                SliverGrid(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      return Center(child: Text('Placeholder Text'));
-                    }, childCount: 20),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 16,
-                            crossAxisSpacing: 16,
-                            childAspectRatio: 1))
-              ],
-            )),*/

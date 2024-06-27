@@ -68,7 +68,6 @@ class RecommendTile extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(right: 12, top: 18),
                             child: FavoriteButton(
-                              
                               iconSize: 30,
                               iconColor: const Color.fromARGB(255, 255, 70, 46),
                               iconDisabledColor:

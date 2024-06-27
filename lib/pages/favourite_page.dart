@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cookbook/util/favourite_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +30,9 @@ class _FavouritePageState extends State<FavouritePage> {
           backgroundColor: const Color.fromRGBO(177, 255, 199, 1),
           shadowColor: const Color.fromRGBO(102, 180, 124, 1),
         ),
-        body: ListView(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 30,
@@ -52,7 +52,7 @@ class _FavouritePageState extends State<FavouritePage> {
             ),
             Container(
                 padding: const EdgeInsets.all(16),
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height * 0.7,
                 child: CustomScrollView(
                   scrollDirection: Axis.vertical,
                   slivers: [
@@ -67,10 +67,10 @@ class _FavouritePageState extends State<FavouritePage> {
                         }, childCount: 20),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
+                                crossAxisCount: 1,
                                 mainAxisSpacing: 16,
                                 crossAxisSpacing: 16,
-                                childAspectRatio: 1))
+                                childAspectRatio: 3))
                   ],
                 )),
           ],
