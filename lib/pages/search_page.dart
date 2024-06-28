@@ -57,7 +57,8 @@ class _SearchPageState extends State<SearchPage> {
                     })
                   },
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       hintText: 'Search...',
                       suffixIcon: Icon(Icons.search)),
                 ),

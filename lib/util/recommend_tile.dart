@@ -1,9 +1,9 @@
-import 'dart:developer';
+import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/information_page.dart';
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class RecommendTile extends StatelessWidget {
+class RecommendTile extends StatefulWidget {
   final int id;
   final String title;
   final String image;
@@ -15,11 +15,28 @@ class RecommendTile extends StatelessWidget {
   });
 
   @override
+  State<RecommendTile> createState() => _RecommendTileState();
+}
+
+class _RecommendTileState extends State<RecommendTile> {
+  void createFavourite() {
+    context
+        .read<FavouriteDatabase>()
+        .addFavourite(widget.title, widget.image, widget.id);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => InformationPage(id: id,image: image,name: title,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => InformationPage(
+                        id: widget.id,
+                        image: widget.image,
+                        name: widget.title,
+                      )));
         },
         child: Padding(
             padding: const EdgeInsets.all(24),
@@ -36,49 +53,49 @@ class RecommendTile extends StatelessWidget {
                 color: Color.fromRGBO(177, 255, 199, 1),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
+              child: Stack(
+                children: [
+                  ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: Image.network(
-                        image,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 24, top: 13),
-                          child: Text(
-                            title,
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontFamily: 'Ariel', fontSize: 20),
-                          ),
-                        )),
-                        Padding(
-                            padding: const EdgeInsets.only(right: 12, top: 18),
-                            child: FavoriteButton(
-                              iconSize: 30,
-                              iconColor: const Color.fromARGB(255, 255, 70, 46),
-                              iconDisabledColor:
-                                  const Color.fromRGBO(102, 180, 124, 1),
-                              valueChanged: (isFavourite) {
-                                log('message');
-                              },
-                            ))
-                      ],
-                    )
-                  ]),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Image.network(
+                          widget.image,
+                          opacity: const AlwaysStoppedAnimation(.85),
+                        ),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: IconButton(
+                            onPressed: () {
+                              createFavourite();
+                            },
+                            icon: const Icon(
+                              Icons.add,
+                              size: 30,
+                            ))),
+                  ),
+                  Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8, bottom: 12, left: 12, right: 40),
+                        child: Text(
+                          widget.title,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontFamily: 'Ariel',
+                              fontSize: 20,
+                              color: Colors.grey.shade800),
+                        ),
+                      ))
+                ],
+              ),
             )));
   }
 }
-/*Color.fromARGB(255, 255, 70, 46)
-Color.fromARGB(255, 255, 70, 46)*/

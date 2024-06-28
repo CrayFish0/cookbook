@@ -1,14 +1,25 @@
-import 'dart:developer';
+import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/information_page.dart';
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SmallTile extends StatelessWidget {
+class SmallTile extends StatefulWidget {
   final int id;
   final String name;
   final String image;
   const SmallTile(
       {super.key, required this.id, required this.image, required this.name});
+
+  @override
+  State<SmallTile> createState() => _SmallTileState();
+}
+
+class _SmallTileState extends State<SmallTile> {
+  void createFavourite() {
+    context
+        .read<FavouriteDatabase>()
+        .addFavourite(widget.name, widget.image, widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +29,9 @@ class SmallTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => InformationPage(
-                      id: id,
-                      image: image,
-                      name: name,
+                      id: widget.id,
+                      image: widget.image,
+                      name: widget.name,
                     )))
       },
       child: Container(
@@ -37,30 +48,30 @@ class SmallTile extends StatelessWidget {
                 child: Container(
                   color: Colors.white,
                   child: Image.network(
-                    image,
+                    widget.image,
                     opacity: const AlwaysStoppedAnimation(.8),
                   ),
                 )),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 8),
               child: Align(
                   alignment: Alignment.bottomRight,
-                  child: FavoriteButton(
-                    iconSize: 30,
-                    iconColor: const Color.fromARGB(255, 255, 70, 46),
-                    iconDisabledColor: const Color.fromRGBO(102, 180, 124, 1),
-                    valueChanged: (isFavourite) {
-                      log('message');
-                    },
-                  )),
+                  child: IconButton(
+                      onPressed: () {
+                        createFavourite();
+                      },
+                      icon: const Icon(
+                        Icons.add,
+                        size: 30,
+                      ))),
             ),
             Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      top: 8, bottom: 8, left: 8, right: 28),
+                      top: 8, bottom: 12, left: 8, right: 40),
                   child: Text(
-                    name,
+                    widget.name,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ))

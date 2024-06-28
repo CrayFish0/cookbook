@@ -1,5 +1,8 @@
+import 'package:cookbook/model/favourite.dart';
+import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/util/favourite_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({super.key});
@@ -10,7 +13,21 @@ class FavouritePage extends StatefulWidget {
 
 class _FavouritePageState extends State<FavouritePage> {
   @override
+  void initState() {
+    super.initState();
+
+    readFavs();
+  }
+
+  void readFavs() {
+    context.read<FavouriteDatabase>().fetchFavourites();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final favouriteDatabase = context.watch<FavouriteDatabase>();
+    List<Favourite> currentFavourite = favouriteDatabase.currentFavourite;
+
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 70,
@@ -58,13 +75,13 @@ class _FavouritePageState extends State<FavouritePage> {
                   slivers: [
                     SliverGrid(
                         delegate: SliverChildBuilderDelegate((context, index) {
+                          final fav = currentFavourite[index];
                           return FavouriteTile(
-                            id: 715415,
-                            image:
-                                'https://img.spoonacular.com/recipes/715415-312x231.jpg',
-                            name: 'Red Lentil Soup with Chicken and Turnips',
+                            id: fav.newId,
+                            image: fav.image,
+                            name: fav.name,realId: fav.id,
                           );
-                        }, childCount: 20),
+                        }, childCount: currentFavourite.length),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 1,
