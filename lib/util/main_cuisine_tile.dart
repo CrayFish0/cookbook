@@ -1,30 +1,31 @@
-import 'package:cookbook/pages/cuisine_page.dart';
 import 'package:flutter/material.dart';
 
-class CuisineTile extends StatelessWidget {
+class MainCuisineTile extends StatelessWidget {
   final String cuisineName;
-  const CuisineTile({super.key, required this.cuisineName});
+  final Color currentColor;
+  final Function callback;
+  const MainCuisineTile(
+      {super.key,
+      required this.cuisineName,
+      required this.currentColor,
+      required this.callback});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CuisinePage(currentName: cuisineName,)));
+        callback(cuisineName);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           constraints: const BoxConstraints(maxHeight: 10),
-          decoration: BoxDecoration(
-              boxShadow: const <BoxShadow>[
-                BoxShadow(
-                    color: Color.fromRGBO(102, 180, 124, 1),
-                    blurRadius: 4,
-                    offset: Offset(0.0, 0.0))
-              ],
-              borderRadius: BorderRadius.circular(100),
-              color: const Color.fromRGBO(177, 255, 199, 1)),
+          decoration: BoxDecoration(boxShadow: const <BoxShadow>[
+            BoxShadow(
+                color: Color.fromRGBO(102, 180, 124, 1),
+                blurRadius: 4,
+                offset: Offset(0.0, 0.0))
+          ], borderRadius: BorderRadius.circular(100), color: currentColor),
           child: Center(
             child: FittedBox(
               fit: BoxFit.contain,

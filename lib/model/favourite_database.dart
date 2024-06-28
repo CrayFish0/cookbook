@@ -1,5 +1,3 @@
-
-
 import 'package:cookbook/model/favourite.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
@@ -18,7 +16,6 @@ class FavouriteDatabase extends ChangeNotifier {
 
   //Create
   Future<void> addFavourite(String name, String image, int recipeId) async {
-
     final newFavourite = Favourite()..newId = recipeId;
 
     newFavourite.newId = recipeId;
@@ -40,7 +37,6 @@ class FavouriteDatabase extends ChangeNotifier {
   //Update
   Future<void> updateFavourite(
       int id, String newname, String newimage, int newrecipeId) async {
-
     final existingFavourite = await isar.favourites.get(id);
     if (existingFavourite != null) {
       existingFavourite.image = newimage;
@@ -53,7 +49,6 @@ class FavouriteDatabase extends ChangeNotifier {
 
   //Delete
   Future<void> deleteFavourite(int id) async {
-
     await isar.writeTxn(() => isar.favourites.delete(id));
     await fetchFavourites();
   }

@@ -1,6 +1,7 @@
 import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/information_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
 
@@ -85,6 +86,12 @@ class _FavouriteTileState extends State<FavouriteTile> {
                 child: IconButton(
                     onPressed: () {
                       deleteFav(widget.realId);
+                      Fluttertoast.showToast(
+                          msg: 'Removed',
+                          fontSize: 18,
+                          textColor: Colors.grey.shade800,
+                          backgroundColor: Colors.grey.shade300,
+                          toastLength: Toast.LENGTH_SHORT);
                     },
                     icon: const Icon(Icons.delete)),
               ),

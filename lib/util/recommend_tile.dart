@@ -1,6 +1,7 @@
 import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/information_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class RecommendTile extends StatefulWidget {
@@ -74,6 +75,12 @@ class _RecommendTileState extends State<RecommendTile> {
                         child: IconButton(
                             onPressed: () {
                               createFavourite();
+                              Fluttertoast.showToast(
+                                  msg: 'Added To Favourites',
+                                  fontSize: 18,
+                                  textColor: Colors.grey.shade800,
+                                  backgroundColor: Colors.grey.shade300,
+                                  toastLength: Toast.LENGTH_SHORT);
                             },
                             icon: const Icon(
                               Icons.add,

@@ -94,7 +94,3 @@ class _FavouritePageState extends State<FavouritePage> {
         ));
   }
 }
-
-/*id": 715415,
-            "title": "Red Lentil Soup with Chicken and Turnips",
-            "image": "https://img.spoonacular.com/recipes/715415-312x231.jpg",*/

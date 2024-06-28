@@ -30,3 +30,5 @@ const List<String> cuisineItems = [
 ];
 
 Map<String, dynamic>? data;
+
+String? newCuisine;

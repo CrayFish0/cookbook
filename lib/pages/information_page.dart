@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:convert';
 import 'package:cookbook/util/ingredients_tile.dart';
 import 'package:cookbook/util/instructions_tile.dart';
@@ -57,29 +55,29 @@ class _InformationPageState extends State<InformationPage> {
                 color: Colors.black,
                 child: Image.network(
                   widget.image,
-                  opacity: AlwaysStoppedAnimation(0.8),
+                  opacity: const AlwaysStoppedAnimation(0.8),
                 ))),
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 35),
             child: Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(100, 255, 255, 255),
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(100, 255, 255, 255),
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back_ios_rounded)),
+                  icon: const Icon(Icons.arrow_back_ios_rounded)),
             ),
           ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-              decoration: BoxDecoration(
-                  boxShadow: const <BoxShadow>[
+              decoration: const BoxDecoration(
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
                         blurRadius: 10, color: Color.fromRGBO(102, 180, 124, 1))
                   ],
@@ -134,7 +132,7 @@ class _InformationPageState extends State<InformationPage> {
                         ),
                         Container(
                             height: MediaQuery.of(context).size.height * 0.11,
-                            color: Color.fromARGB(70, 255, 255, 255),
+                            color: const Color.fromARGB(70, 255, 255, 255),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: ingredients.length,
@@ -165,14 +163,14 @@ class _InformationPageState extends State<InformationPage> {
                           ),
                         ),
                         Container(
-                          color: Color.fromARGB(70, 255, 255, 255),
+                          color: const Color.fromARGB(70, 255, 255, 255),
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: Color.fromRGBO(177, 255, 199, 1),
-                                    boxShadow: const <BoxShadow>[
+                                    boxShadow: <BoxShadow>[
                                       BoxShadow(
                                           blurRadius: 4,
                                           color:
@@ -188,7 +186,7 @@ class _InformationPageState extends State<InformationPage> {
                                     animation: true,
                                     expandText: 'Show More',
                                     collapseText: 'Show Less',
-                                    linkColor: Color.fromRGBO(102, 180, 124, 1),
+                                    linkColor: const Color.fromRGBO(102, 180, 124, 1),
                                     style: TextStyle(
                                         fontFamily: 'Ariel',
                                         fontSize: 16,
@@ -212,7 +210,7 @@ class _InformationPageState extends State<InformationPage> {
                         ),
                         Container(
                             height: MediaQuery.of(context).size.height * 0.2,
-                            color: Color.fromARGB(70, 255, 255, 255),
+                            color: const Color.fromARGB(70, 255, 255, 255),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: analyzedInstructions.length,
@@ -231,7 +229,7 @@ class _InformationPageState extends State<InformationPage> {
                               animation: true,
                               expandText: 'Show More',
                               collapseText: 'Show Less',
-                              linkColor: Color.fromRGBO(102, 180, 124, 1),
+                              linkColor: const Color.fromRGBO(102, 180, 124, 1),
                               style: TextStyle(
                                   fontFamily: 'Ariel',
                                   fontSize: 16,
