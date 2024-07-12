@@ -15,9 +15,8 @@ class BottomNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           activeColor: Theme.of(context).colorScheme.primaryFixedDim,
           color: Theme.of(context).colorScheme.primaryFixed,
-          tabBackgroundColor: Theme.of(context).colorScheme.tertiaryFixedDim,
-          tabActiveBorder:
-              Border.all(color: Theme.of(context).colorScheme.tertiaryFixedDim),
+          tabBackgroundColor: Colors.transparent,
+          tabActiveBorder: Border.all(color: Colors.transparent),
           tabBorderRadius: 16,
           onTabChange: (value) => onTabChange!(value),
           tabs: [

@@ -52,6 +52,7 @@ class _SearchPageState extends State<SearchPage> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: TextField(
+                  cursorColor: Theme.of(context).colorScheme.tertiary,
                   onSubmitted: (value) => {
                     setState(() {
                       recipes = getRecipes(value);

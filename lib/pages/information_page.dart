@@ -85,7 +85,7 @@ class _InformationPageState extends State<InformationPage> {
                         blurRadius: 10,
                         color: Theme.of(context).colorScheme.secondary)
                   ],
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.secondaryFixed,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10))),
