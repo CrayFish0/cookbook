@@ -69,20 +69,24 @@ class _InformationPageState extends State<InformationPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back_ios_rounded)),
+                  icon: const Icon(
+                    Icons.arrow_back_ios_rounded,
+                    color: Colors.black,
+                  )),
             ),
           ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        blurRadius: 10, color: Color.fromRGBO(102, 180, 124, 1))
+                        blurRadius: 10,
+                        color: Theme.of(context).colorScheme.secondary)
                   ],
-                  color: Color.fromRGBO(177, 255, 199, 1),
-                  borderRadius: BorderRadius.only(
+                  color: Theme.of(context).colorScheme.primary,
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10))),
               height: MediaQuery.of(context).size.height -
@@ -92,7 +96,10 @@ class _InformationPageState extends State<InformationPage> {
                   future: recipes,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ));
                     }
                     if (snapshot.hasError) {
                       return Center(child: Text(snapshot.error.toString()));
@@ -113,7 +120,8 @@ class _InformationPageState extends State<InformationPage> {
                             style: TextStyle(
                                 fontFamily: 'Ariel',
                                 fontSize: 26,
-                                color: Colors.grey.shade800),
+                                color:
+                                    Theme.of(context).colorScheme.primaryFixed),
                           ),
                         ),
                         SizedBox(
@@ -127,12 +135,13 @@ class _InformationPageState extends State<InformationPage> {
                             style: TextStyle(
                                 fontFamily: 'Ariel',
                                 fontSize: 25,
-                                color: Colors.grey.shade700),
+                                color:
+                                    Theme.of(context).colorScheme.primaryFixed),
                           ),
                         ),
                         Container(
                             height: MediaQuery.of(context).size.height * 0.11,
-                            color: const Color.fromARGB(70, 255, 255, 255),
+                            color: const Color.fromARGB(20, 255, 255, 255),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: ingredients.length,
@@ -159,22 +168,25 @@ class _InformationPageState extends State<InformationPage> {
                             style: TextStyle(
                                 fontFamily: 'Ariel',
                                 fontSize: 23,
-                                color: Colors.grey.shade700),
+                                color:
+                                    Theme.of(context).colorScheme.primaryFixed),
                           ),
                         ),
                         Container(
-                          color: const Color.fromARGB(70, 255, 255, 255),
+                          color: const Color.fromARGB(20, 255, 255, 255),
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Container(
-                                decoration: const BoxDecoration(
-                                    color: Color.fromRGBO(177, 255, 199, 1),
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
                                           blurRadius: 4,
-                                          color:
-                                              Color.fromRGBO(102, 180, 124, 1))
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary)
                                     ]),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -186,11 +198,15 @@ class _InformationPageState extends State<InformationPage> {
                                     animation: true,
                                     expandText: 'Show More',
                                     collapseText: 'Show Less',
-                                    linkColor: const Color.fromRGBO(102, 180, 124, 1),
+                                    linkColor: Theme.of(context)
+                                        .colorScheme
+                                        .primaryFixedDim,
                                     style: TextStyle(
                                         fontFamily: 'Ariel',
                                         fontSize: 16,
-                                        color: Colors.grey.shade600),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primaryFixed),
                                   ),
                                 ),
                               ),
@@ -205,12 +221,13 @@ class _InformationPageState extends State<InformationPage> {
                             style: TextStyle(
                                 fontFamily: 'Ariel',
                                 fontSize: 20,
-                                color: Colors.grey.shade600),
+                                color:
+                                    Theme.of(context).colorScheme.primaryFixed),
                           ),
                         ),
                         Container(
                             height: MediaQuery.of(context).size.height * 0.2,
-                            color: const Color.fromARGB(70, 255, 255, 255),
+                            color: const Color.fromARGB(20, 255, 255, 255),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: analyzedInstructions.length,
@@ -229,11 +246,14 @@ class _InformationPageState extends State<InformationPage> {
                               animation: true,
                               expandText: 'Show More',
                               collapseText: 'Show Less',
-                              linkColor: const Color.fromRGBO(102, 180, 124, 1),
+                              linkColor:
+                                  Theme.of(context).colorScheme.secondary,
                               style: TextStyle(
                                   fontFamily: 'Ariel',
                                   fontSize: 16,
-                                  color: Colors.grey.shade600),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryFixed),
                             ),
                           ),
                         ),

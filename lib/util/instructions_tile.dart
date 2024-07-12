@@ -13,10 +13,11 @@ class InstructionsTile extends StatelessWidget {
         height: double.infinity,
         constraints:
             BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 32),
-        decoration: const BoxDecoration(
-            color: Color.fromRGBO(177, 255, 199, 1),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
             boxShadow: <BoxShadow>[
-              BoxShadow(blurRadius: 4, color: Color.fromRGBO(102, 180, 124, 1))
+              BoxShadow(
+                  blurRadius: 4, color: Theme.of(context).colorScheme.secondary)
             ]),
         child: Padding(
           padding: const EdgeInsets.all(8),
@@ -30,7 +31,7 @@ class InstructionsTile extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: 'Ariel',
                           fontSize: 20,
-                          color: Colors.grey.shade700)),
+                          color: Theme.of(context).colorScheme.primaryFixed)),
                 ),
               ),
               Center(
@@ -44,7 +45,9 @@ class InstructionsTile extends StatelessWidget {
                             style: TextStyle(
                                 fontFamily: 'Ariel',
                                 fontSize: 16,
-                                color: Colors.grey.shade700)))
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryFixed)))
                   ],
                 ),
               )

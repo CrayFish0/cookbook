@@ -15,10 +15,11 @@ class IngredientsTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
-        decoration: const BoxDecoration(
-            color: Color.fromRGBO(177, 255, 199, 1),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
             boxShadow: <BoxShadow>[
-              BoxShadow(blurRadius: 4, color: Color.fromRGBO(102, 180, 124, 1))
+              BoxShadow(
+                  blurRadius: 4, color: Theme.of(context).colorScheme.secondary)
             ]),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -37,7 +38,7 @@ class IngredientsTile extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: 'Ariel',
                           fontSize: 12,
-                          color: Colors.grey.shade700),
+                          color: Theme.of(context).colorScheme.primaryFixed),
                     ),
                   ),
                   FittedBox(
@@ -47,7 +48,7 @@ class IngredientsTile extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Ariel',
                             fontSize: 12,
-                            color: Colors.grey.shade700),
+                            color: Theme.of(context).colorScheme.primaryFixed),
                       )),
                 ],
               ),

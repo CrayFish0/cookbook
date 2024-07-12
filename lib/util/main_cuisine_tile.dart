@@ -20,11 +20,11 @@ class MainCuisineTile extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           constraints: const BoxConstraints(maxHeight: 10),
-          decoration: BoxDecoration(boxShadow: const <BoxShadow>[
+          decoration: BoxDecoration(boxShadow: <BoxShadow>[
             BoxShadow(
-                color: Color.fromRGBO(102, 180, 124, 1),
+                color: Theme.of(context).colorScheme.secondary,
                 blurRadius: 4,
-                offset: Offset(0.0, 0.0))
+                offset: const Offset(0.0, 0.0))
           ], borderRadius: BorderRadius.circular(100), color: currentColor),
           child: Center(
             child: FittedBox(
@@ -33,10 +33,10 @@ class MainCuisineTile extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 child: Text(
                   cuisineName,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontFamily: 'Ariel',
                       fontSize: 18,
-                      color: Color.fromRGBO(0, 70, 20, 1)),
+                      color: Theme.of(context).colorScheme.primaryFixed),
                 ),
               ),
             ),

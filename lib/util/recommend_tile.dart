@@ -1,5 +1,6 @@
 import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/information_page.dart';
+import 'package:cookbook/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -44,28 +45,33 @@ class _RecommendTileState extends State<RecommendTile> {
             child: Container(
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width - 48),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                      color: Color.fromRGBO(102, 180, 124, 1),
+                      color: Theme.of(context).colorScheme.secondary,
                       blurRadius: 7,
-                      offset: Offset(0.0, 0.0))
+                      offset: const Offset(0.0, 0.0))
                 ],
-                color: Color.fromRGBO(177, 255, 199, 1),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Stack(
                 children: [
                   ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                       child: Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                                const BorderRadius.all(Radius.circular(10))),
                         child: Image.network(
                           widget.image,
-                          opacity: const AlwaysStoppedAnimation(.85),
+                          opacity: AlwaysStoppedAnimation(
+                              Provider.of<FavouriteDatabase>(context)
+                                          .themeData ==
+                                      lightmode
+                                  ? 0.85
+                                  : 0.6),
                         ),
                       )),
                   Padding(
@@ -98,7 +104,8 @@ class _RecommendTileState extends State<RecommendTile> {
                           style: TextStyle(
                               fontFamily: 'Ariel',
                               fontSize: 20,
-                              color: Colors.grey.shade800),
+                              color:
+                                  Theme.of(context).colorScheme.primaryFixed),
                         ),
                       ))
                 ],

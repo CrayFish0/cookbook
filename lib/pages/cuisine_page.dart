@@ -57,13 +57,16 @@ class _CuisinePageState extends State<CuisinePage> {
             height: MediaQuery.of(context).size.height * 0.1,
             child: Stack(
               children: [
-                const Align(
+                Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 6),
+                      padding: const EdgeInsets.only(bottom: 6),
                       child: Text(
                         'Cusines',
-                        style: TextStyle(fontSize: 24, fontFamily: 'Ariel'),
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontFamily: 'Ariel',
+                            color: Theme.of(context).colorScheme.primaryFixed),
                       ),
                     )),
                 Align(
@@ -93,8 +96,8 @@ class _CuisinePageState extends State<CuisinePage> {
                       return MainCuisineTile(
                           cuisineName: cuisineItems[index],
                           currentColor: cuisineItems[index] == newCuisine
-                              ? const Color.fromRGBO(214, 255, 226, 1)
-                              : const Color.fromRGBO(177, 255, 199, 1),
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.primaryContainer,
                           callback: callback);
                     }, childCount: cuisineItems.length),
                     gridDelegate:

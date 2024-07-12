@@ -39,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         resizeToAvoidBottomInset: false,
         body: ListView(
           physics: const NeverScrollableScrollPhysics(),

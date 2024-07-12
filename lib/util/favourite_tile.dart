@@ -40,20 +40,21 @@ class _FavouriteTileState extends State<FavouriteTile> {
                     )));
       },
       child: Container(
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: Color.fromRGBO(177, 255, 199, 1),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Theme.of(context).colorScheme.primary,
             boxShadow: <BoxShadow>[
-              BoxShadow(color: Color.fromRGBO(102, 180, 124, 1), blurRadius: 4)
+              BoxShadow(
+                  color: Theme.of(context).colorScheme.secondary, blurRadius: 4)
             ]),
         child: Stack(
           children: [
             Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Colors.white,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                   child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -73,7 +74,7 @@ class _FavouriteTileState extends State<FavouriteTile> {
                       style: TextStyle(
                           fontFamily: 'Ariel',
                           fontSize: 16,
-                          color: Colors.grey.shade600),
+                          color: Theme.of(context).colorScheme.primaryFixed),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),

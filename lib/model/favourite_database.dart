@@ -2,6 +2,7 @@ import 'package:cookbook/model/favourite.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cookbook/theme/theme.dart';
 
 class FavouriteDatabase extends ChangeNotifier {
   static late Isar isar;
@@ -51,5 +52,21 @@ class FavouriteDatabase extends ChangeNotifier {
   Future<void> deleteFavourite(int id) async {
     await isar.writeTxn(() => isar.favourites.delete(id));
     await fetchFavourites();
+  }
+
+  ThemeData _themeData = lightmode;
+  ThemeData get themeData => _themeData;
+
+  set themeData(ThemeData themeData) {
+    _themeData = themeData;
+    notifyListeners();
+  }
+
+  void toggleTheme() {
+    if (_themeData == lightmode) {
+      themeData = darkmode;
+    } else {
+      themeData = lightmode;
+    }
   }
 }

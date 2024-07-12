@@ -36,18 +36,19 @@ class _SmallTileState extends State<SmallTile> {
                     )))
       },
       child: Container(
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: Color.fromRGBO(177, 255, 199, 1),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Theme.of(context).colorScheme.primary,
             boxShadow: <BoxShadow>[
-              BoxShadow(color: Color.fromRGBO(102, 180, 124, 1), blurRadius: 4)
+              BoxShadow(
+                  color: Theme.of(context).colorScheme.secondary, blurRadius: 4)
             ]),
         child: Stack(
           children: [
             ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: Container(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   child: Image.network(
                     widget.image,
                     opacity: const AlwaysStoppedAnimation(.8),

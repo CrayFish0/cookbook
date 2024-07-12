@@ -1,5 +1,6 @@
 import 'package:cookbook/model/favourite.dart';
 import 'package:cookbook/model/favourite_database.dart';
+import 'package:cookbook/theme/theme.dart';
 import 'package:cookbook/util/favourite_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,20 +33,37 @@ class _FavouritePageState extends State<FavouritePage> {
         appBar: AppBar(
           toolbarHeight: 70,
           //Logo initialisation
-          title: Image.asset(
-            "assets/Logo.png",
-            width: 120,
-            height: 120,
-          ),
+          title: Image.asset("assets/Logo.png",
+              width: 120,
+              height: 120,
+              color: Theme.of(context).colorScheme.primaryFixed),
           //curved edges
           elevation: 3,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(12),
           )),
+
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: IconButton(
+                  onPressed: () {
+                    Provider.of<FavouriteDatabase>(context, listen: false)
+                        .toggleTheme();
+                  },
+                  icon: Icon(
+                    Provider.of<FavouriteDatabase>(context).themeData ==
+                            lightmode
+                        ? Icons.dark_mode
+                        : Icons.light_mode,
+                    color: Theme.of(context).colorScheme.primaryFixed,
+                  )),
+            )
+          ],
           //colour initialization
-          backgroundColor: const Color.fromRGBO(177, 255, 199, 1),
-          shadowColor: const Color.fromRGBO(102, 180, 124, 1),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          shadowColor: Theme.of(context).colorScheme.secondary,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -54,14 +72,14 @@ class _FavouritePageState extends State<FavouritePage> {
             const SizedBox(
               height: 30,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'FAVOURITES',
                 style: TextStyle(
                     fontSize: 28,
                     fontFamily: 'Ariel',
-                    color: Color.fromRGBO(0, 70, 20, 1)),
+                    color: Theme.of(context).colorScheme.tertiary),
               ),
             ),
             const SizedBox(
@@ -79,7 +97,8 @@ class _FavouritePageState extends State<FavouritePage> {
                           return FavouriteTile(
                             id: fav.newId,
                             image: fav.image,
-                            name: fav.name,realId: fav.id,
+                            name: fav.name,
+                            realId: fav.id,
                           );
                         }, childCount: currentFavourite.length),
                         gridDelegate:

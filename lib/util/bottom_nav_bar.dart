@@ -10,32 +10,31 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 90),
-      padding: const EdgeInsets.only(bottom: 8),
       child: GNav(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          activeColor: const Color.fromRGBO(102, 180, 124, 1),
-          color: Colors.grey,
-          tabBackgroundColor: const Color.fromARGB(60, 227, 227, 227),
+          activeColor: Theme.of(context).colorScheme.primaryFixedDim,
+          color: Theme.of(context).colorScheme.primaryFixed,
+          tabBackgroundColor: Theme.of(context).colorScheme.tertiaryFixedDim,
           tabActiveBorder:
-              Border.all(color: const Color.fromARGB(60, 201, 201, 201)),
+              Border.all(color: Theme.of(context).colorScheme.tertiaryFixedDim),
           tabBorderRadius: 16,
           onTabChange: (value) => onTabChange!(value),
-          tabs: const [
+          tabs: [
             GButton(
               icon: Icons.home_rounded,
               text: 'Home',
-              textColor: Color.fromRGBO(102, 180, 124, 1),
+              textColor: Theme.of(context).colorScheme.primaryFixedDim,
             ),
             GButton(
               icon: Icons.search,
               text: 'Search',
-              textColor: Color.fromRGBO(102, 180, 124, 1),
+              textColor: Theme.of(context).colorScheme.primaryFixedDim,
             ),
             GButton(
               icon: Icons.favorite,
               text: 'Favs',
-              textColor: Color.fromRGBO(102, 180, 124, 1),
+              textColor: Theme.of(context).colorScheme.primaryFixedDim,
             )
           ]),
     );
