@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/main_page.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,7 @@ void main() async {
 
   runApp(ChangeNotifierProvider(
     create: (context) => FavouriteDatabase(),
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<FavouriteDatabase>(context).themeData,
-      home: MainPage(),
+      home: const MainPage(),
     );
   }
 }

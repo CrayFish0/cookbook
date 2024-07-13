@@ -83,13 +83,18 @@ class _RecommendTileState extends State<RecommendTile> {
                               createFavourite();
                               Fluttertoast.showToast(
                                   msg: 'Added To Favourites',
-                                  fontSize: 18,
-                                  textColor: Colors.grey.shade800,
-                                  backgroundColor: Colors.grey.shade300,
+                                  fontSize: 14,
+                                  textColor: Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainerLow,
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainerHigh,
                                   toastLength: Toast.LENGTH_SHORT);
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.add,
+                              color: Theme.of(context).colorScheme.primaryFixed,
                               size: 30,
                             ))),
                   ),

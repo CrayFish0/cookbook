@@ -63,13 +63,14 @@ class _SmallTileState extends State<SmallTile> {
                         createFavourite();
                         Fluttertoast.showToast(
                             msg: 'Added To Favourites',
-                            fontSize: 18,
+                            fontSize: 10,
                             textColor: Colors.grey.shade800,
                             backgroundColor: Colors.grey.shade300,
                             toastLength: Toast.LENGTH_SHORT);
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.add,
+                        color: Theme.of(context).colorScheme.primaryFixed,
                         size: 30,
                       ))),
             ),

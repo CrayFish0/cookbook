@@ -94,7 +94,10 @@ class _FavouriteTileState extends State<FavouriteTile> {
                           backgroundColor: Colors.grey.shade300,
                           toastLength: Toast.LENGTH_SHORT);
                     },
-                    icon: const Icon(Icons.delete)),
+                    icon: Icon(
+                      Icons.delete,
+                      color: Theme.of(context).colorScheme.primaryFixed,
+                    )),
               ),
             )
           ],
