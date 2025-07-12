@@ -30,7 +30,31 @@ Cookbook is a modern Android application built with Flutter that allows users to
 - **Optimized Navigation**: IndexedStack with AutomaticKeepAliveClientMixin for smooth transitions
 - **Error Handling**: Comprehensive error handling with user-friendly messages
 
-## 🚀 Installation
+## � Screenshots
+
+### Dark Mode (Default)
+
+<div align="center">
+  <img src="screenshots/dark_main.jpg" alt="Dark Mode Home Screen" width="200"/>
+  <img src="screenshots/dark_search.jpg" alt="Dark Mode Search Screen" width="200"/>
+  <br/>
+  <img src="screenshots/dark_favourites.jpg" alt="Dark Mode Favorites Screen" width="200"/>
+  <img src="screenshots/dark_ingredients.jpg" alt="Dark Mode Recipe Details" width="200"/>
+</div>
+
+### Light Mode
+
+<div align="center">
+  <img src="screenshots/light_main.jpg" alt="Light Mode Home Screen" width="200"/>
+  <img src="screenshots/light_search.jpg" alt="Light Mode Search Screen" width="200"/>
+  <br/>
+  <img src="screenshots/light_favourite.jpg" alt="Light Mode Favorites Screen" width="200"/>
+  <img src="screenshots/light_ingredients.jpg" alt="Light Mode Recipe Details" width="200"/>
+</div>
+
+*The app showcases a beautiful glassmorphism design with smooth animations and floating elements in both light and dark themes.*
+
+## �🚀 Installation
 
 1. **Clone the repository:**
 
