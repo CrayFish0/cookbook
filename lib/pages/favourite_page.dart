@@ -1,6 +1,7 @@
 import 'package:cookbook/model/favourite.dart';
 import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/theme/theme.dart';
+import 'package:cookbook/util/background_widget.dart';
 import 'package:cookbook/util/favourite_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +13,18 @@ class FavouritePage extends StatefulWidget {
   State<FavouritePage> createState() => _FavouritePageState();
 }
 
-class _FavouritePageState extends State<FavouritePage> {
+class _FavouritePageState extends State<FavouritePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
-
-    readFavs();
+    // Defer the call to after the build phase
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      readFavs();
+    });
   }
 
   void readFavs() {
@@ -26,90 +33,118 @@ class _FavouritePageState extends State<FavouritePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final favouriteDatabase = context.watch<FavouriteDatabase>();
     List<Favourite> currentFavourite = favouriteDatabase.currentFavourite;
 
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 70,
-          //Logo initialisation
-          title: Image.asset("assets/Logo.png",
-              width: 120,
-              height: 120,
-              color: Theme.of(context).colorScheme.primaryFixed),
-          //curved edges
-          elevation: 3,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(12),
-          )),
-
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: IconButton(
-                  onPressed: () {
-                    Provider.of<FavouriteDatabase>(context, listen: false)
-                        .toggleTheme();
-                  },
-                  icon: Icon(
-                    Provider.of<FavouriteDatabase>(context).themeData ==
-                            lightmode
-                        ? Icons.dark_mode
-                        : Icons.light_mode,
-                    color: Theme.of(context).colorScheme.primaryFixed,
-                  )),
-            )
-          ],
-          //colour initialization
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          shadowColor: Theme.of(context).colorScheme.secondary,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'FAVOURITES',
-                style: TextStyle(
-                    fontSize: 28,
-                    fontFamily: 'Ariel',
-                    color: Theme.of(context).colorScheme.tertiary),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-                padding: const EdgeInsets.all(16),
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: CustomScrollView(
-                  scrollDirection: Axis.vertical,
-                  slivers: [
-                    SliverGrid(
-                        delegate: SliverChildBuilderDelegate((context, index) {
-                          final fav = currentFavourite[index];
-                          return FavouriteTile(
-                            id: fav.newId,
-                            image: fav.image,
-                            name: fav.name,
-                            realId: fav.id,
-                          );
-                        }, childCount: currentFavourite.length),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                mainAxisSpacing: 16,
-                                crossAxisSpacing: 16,
-                                childAspectRatio: 3))
+      body: BackgroundWidget(
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Header
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Your Favorites',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${currentFavourite.length} saved recipes',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.primaryFixed,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Provider.of<FavouriteDatabase>(context, listen: false)
+                              .toggleTheme();
+                        },
+                        icon: Icon(
+                          Provider.of<FavouriteDatabase>(context).themeData ==
+                                  darkmode
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode_outlined,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ),
+                    ),
                   ],
-                )),
-          ],
-        ));
+                ),
+              ),
+
+              // Favorites List
+              Expanded(
+                child: currentFavourite.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.favorite_outline,
+                              size: 64,
+                              color: Theme.of(context).colorScheme.primaryFixed,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No favorites yet',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Start saving your favorite recipes!',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    Theme.of(context).colorScheme.primaryFixed,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        itemCount: currentFavourite.length,
+                        itemBuilder: (context, index) {
+                          final fav = currentFavourite[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: FavouriteTile(
+                              id: fav.newId,
+                              image: fav.image,
+                              name: fav.name,
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

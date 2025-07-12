@@ -1,11 +1,15 @@
-import 'package:isar/isar.dart';
+import 'package:hive/hive.dart';
 
 part 'favourite.g.dart';
 
-@Collection()
-class Favourite {
-  Id id = Isar.autoIncrement;
+@HiveType(typeId: 0)
+class Favourite extends HiveObject {
+  @HiveField(0)
   late int newId;
+
+  @HiveField(1)
   late String name;
+
+  @HiveField(2)
   late String image;
 }

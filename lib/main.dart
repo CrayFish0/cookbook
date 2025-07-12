@@ -1,6 +1,7 @@
 import 'package:cookbook/model/favourite_database.dart';
 import 'package:cookbook/pages/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -18,6 +19,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        Theme.of(context).colorScheme.surface == Colors.white
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<FavouriteDatabase>(context).themeData,

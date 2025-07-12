@@ -55,23 +55,36 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(
-        onTabChange: (index) => navigateBar(index),
+      body: Stack(
+        children: [
+          // Main content
+          FutureBuilder(
+            future: recipes,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
+              }
+              data = snapshot.data!;
+              return IndexedStack(
+                index: _selectIndex,
+                children: _pages,
+              );
+            },
+          ),
+          // Floating bottom navigation
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: BottomNavBar(
+              onTabChange: (index) => navigateBar(index),
+            ),
+          ),
+        ],
       ),
-      body: FutureBuilder(
-          future: recipes,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
-            data = snapshot.data!;
-            return Container(
-              child: _pages[_selectIndex],
-            );
-          }),
     );
   }
 }
